@@ -30,6 +30,10 @@ script : |
   sudo apt-get install flex
   sudo apt-get install bison
 
+  # install MySQL
+  sudo apt-get -y install mysql-server mysql-client
+  sudo service mysql start
+
   # Install php-build
   git clone https://github.com/CHH/php-build.git
   sudo ./php-build/install.sh
