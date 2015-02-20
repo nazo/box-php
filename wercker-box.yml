@@ -11,10 +11,12 @@ build:
 description : php
 keywords:
   - php
+  - mysql
 packages :
   - php@5.3
   - php@5.4
   - php@5.5
+  - mysql@5.5
 script : |
   # Add eports to profile, rc didn't work
   echo 'export PATH="/usr/local/bin:$PATH"' >> $HOME/.bash_profile
@@ -30,9 +32,21 @@ script : |
   sudo apt-get install flex
   sudo apt-get install bison
 
-  # install MySQL
-  sudo apt-get -y install mysql-server mysql-client
-  sudo service mysql start
+  # mysql
+  sudo apt-get purge mysql-server
+  sudo apt-get purge mysql-common
+  sudo rm -rf /var/log/mysql
+  sudo rm -rf /var/log/mysql.*
+  sudo rm -rf /var/lib/mysql
+  sudo rm -rf /etc/mysql
+  sudo apt-get install -y mysql-server --fix-missing --fix-broken
+  sudo apt-get install -y mysql-server-5.5 libmysqlclient-dev
+
+  echo "[mysqld]" > my.cnf
+  echo "innodb_flush_log_at_trx_commit = 0" >> my.cnf
+  echo "innodb_buffer_pool_size = 512M" >> my.cnf
+  sudo cp my.cnf /etc/mysql/conf.d/local.cnf
+  sudo restart mysql
 
   # Install php-build
   git clone https://github.com/CHH/php-build.git
