@@ -56,7 +56,7 @@ script : |
   rm -rf ./php-build
   sudo chown -R ubuntu $HOME
   sudo chown -R ubuntu /usr/local/share/php-build
-  export PHP_BUILD_CONFIGURE_OPTS="--with-bz2 --enable-intl --enable-calendar --enable-mbstring --with-mcrypt=/usr/lib --with-pdo-mysql=/usr/lib --enable-mysqlnd "
+  export PHP_BUILD_CONFIGURE_OPTS="--with-bz2 --enable-intl --enable-calendar --enable-mbstring --with-mcrypt=/usr --with-pdo-mysql=/usr --enable-mysqlnd "
   export PHP_BUILD_VERSIONS_DIR="$HOME/.phpenv/versions"
 
   # Validate php-build
